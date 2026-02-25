@@ -92,10 +92,10 @@ const html = `<!DOCTYPE html>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
   :root{
-    --bg:#080b14; --bg2:#0d1117; --surface:rgba(255,255,255,.04);
-    --border:rgba(255,255,255,.07); --text:#e2e8f0; --muted:#4b5563;
-    --green:#22c55e; --cyan:#06b6d4; --indigo:#818cf8;
-    --orange:#f97316; --red:#ef4444; --yellow:#eab308;
+    --bg:#ffffff; --bg2:#ffffff; --surface:#ffffff;
+    --border:#e2e8f0; --text:#000000; --muted:#6b7280;
+    --green:#16a34a; --cyan:#0891b2; --indigo:#4f46e5;
+    --orange:#ea580c; --red:#dc2626; --yellow:#ca8a04;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:24px 20px}
@@ -109,14 +109,14 @@ const html = `<!DOCTYPE html>
   .hdr-sub{font-size:12px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace}
   .hdr-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .pill{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;border:1px solid}
-  .pill-green{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:var(--green)}
-  .pill-muted{background:var(--surface);border-color:var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace}
+  .pill-green{background:#dcfce7;border-color:#86efac;color:var(--green)}
+  .pill-muted{background:#f9fafb;border-color:var(--border);color:#000000;font-family:'JetBrains Mono',monospace}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.4s infinite}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
   /* stat row */
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:20px}
-  .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;transition:transform .2s,border-color .2s}
-  .stat:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.14)}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;transition:transform .2s,box-shadow .2s;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+  .stat:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
   .stat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
   .stat-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
   .stat-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
@@ -124,13 +124,13 @@ const html = `<!DOCTYPE html>
   .stat-sub{font-size:12px;color:var(--muted);margin-top:6px}
   /* progress bar */
   .bar-wrap{margin-top:14px}
-  .bar-track{height:6px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden}
+  .bar-track{height:6px;background:#e2e8f0;border-radius:999px;overflow:hidden}
   .bar-fill{height:100%;border-radius:999px;transition:width .8s cubic-bezier(.4,0,.2,1)}
   .bar-row{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px;font-family:'JetBrains Mono',monospace}
   /* sparkline panel */
   .panels{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
   @media(max-width:680px){.panels{grid-template-columns:1fr}}
-  .panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px}
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 1px 6px rgba(0,0,0,.08)}
   .panel-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px}
   /* canvas chart */
   canvas{width:100%;border-radius:8px}
@@ -138,7 +138,7 @@ const html = `<!DOCTYPE html>
   .cores{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .core-row{display:flex;align-items:center;gap:8px;font-size:12px;font-family:'JetBrains Mono',monospace}
   .core-label{color:var(--muted);width:44px;flex-shrink:0}
-  .core-track{flex:1;height:5px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden}
+  .core-track{flex:1;height:5px;background:#e2e8f0;border-radius:999px;overflow:hidden}
   .core-fill{height:100%;border-radius:999px;transition:width .6s}
   .core-val{color:var(--muted);width:32px;text-align:right;flex-shrink:0}
   /* info table */
@@ -150,16 +150,16 @@ const html = `<!DOCTYPE html>
   .info-table td:last-child{font-family:'JetBrains Mono',monospace;font-size:12px}
   /* load avg */
   .load-chips{display:flex;gap:8px;margin-top:8px}
-  .chip{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:8px;padding:8px 14px;text-align:center}
+  .chip{background:#f9fafb;border:1px solid var(--border);border-radius:8px;padding:8px 14px;text-align:center}
   .chip-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-  .chip-val{font-size:18px;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:3px}
+  .chip-val{font-size:18px;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:3px;color:#000000}
   /* alert banner */
-  .alert{display:none;align-items:center;gap:10px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#fca5a5;border-radius:12px;padding:12px 18px;margin-bottom:18px;font-size:13px}
+  .alert{display:none;align-items:center;gap:10px;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:12px;padding:12px 18px;margin-bottom:18px;font-size:13px}
   .alert.show{display:flex}
   footer{text-align:center;color:var(--muted);font-size:12px;margin-top:10px}
   /* color helpers */
   .c-green{color:var(--green)} .c-cyan{color:var(--cyan)} .c-indigo{color:var(--indigo)} .c-orange{color:var(--orange)} .c-red{color:var(--red)}
-  .bg-green{background:rgba(34,197,94,.15)} .bg-cyan{background:rgba(6,182,212,.15)} .bg-indigo{background:rgba(129,140,248,.15)} .bg-orange{background:rgba(249,115,22,.15)}
+  .bg-green{background:#dcfce7} .bg-cyan{background:#cffafe} .bg-indigo{background:#e0e7ff} .bg-orange{background:#ffedd5}
 </style>
 </head>
 <body>
@@ -300,7 +300,7 @@ function drawChart() {
   if (history.length < 2) return;
 
   // Grid lines
-  ctx.strokeStyle = 'rgba(255,255,255,.05)';
+  ctx.strokeStyle = 'rgba(0,0,0,.05)';
   ctx.lineWidth   = 1;
   [25, 50, 75].forEach(pct => {
     const y = H - (pct / 100) * H;
@@ -311,8 +311,8 @@ function drawChart() {
 
   // Gradient fill
   const grad = ctx.createLinearGradient(0, 0, 0, H);
-  grad.addColorStop(0, 'rgba(129,140,248,.35)');
-  grad.addColorStop(1, 'rgba(129,140,248,.01)');
+  grad.addColorStop(0, 'rgba(79,70,229,.2)');
+  grad.addColorStop(1, 'rgba(79,70,229,.01)');
   ctx.beginPath();
   history.forEach((v, i) => {
     const x = i * step, y = H - (v / 100) * H;
@@ -326,7 +326,7 @@ function drawChart() {
 
   // Line
   ctx.beginPath();
-  ctx.strokeStyle = '#818cf8';
+  ctx.strokeStyle = '#4f46e5';
   ctx.lineWidth   = 2;
   ctx.lineJoin    = 'round';
   history.forEach((v, i) => {
@@ -339,7 +339,7 @@ function drawChart() {
   const lx = (history.length - 1) * step, ly = H - (history[history.length - 1] / 100) * H;
   ctx.beginPath();
   ctx.arc(lx, ly, 4, 0, Math.PI * 2);
-  ctx.fillStyle = '#a5b4fc';
+  ctx.fillStyle = '#6366f1';
   ctx.fill();
 }
 
