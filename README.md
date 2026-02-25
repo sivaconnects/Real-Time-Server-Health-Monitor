@@ -1,147 +1,38 @@
 # 📡 Real-Time Server Health Monitor
 
-A lightweight, real-time server monitoring dashboard built with **pure Node.js** — no frameworks, no external dependencies. Streams live CPU, memory, disk, and system metrics to a clean web dashboard using **Server-Sent Events (SSE)**.
+A real-time server monitoring dashboard built with **pure Node.js**. Shows live CPU, memory, disk, and system metrics on a clean web dashboard — auto refreshes every 2 seconds.
 
-> 🚀 Built as part of my DevOps learning journey — deployed on **AWS EC2**.
+> Built as part of my DevOps learning journey — deployed on **AWS EC2**.
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.x-green?style=flat-square&logo=node.js)
 ![AWS EC2](https://img.shields.io/badge/Deployed%20on-AWS%20EC2-orange?style=flat-square&logo=amazon-aws)
-![License](https://img.shields.io/badge/License-ISC-blue?style=flat-square)
 ![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-brightgreen?style=flat-square)
-
----
-
-## 🖥️ Features
-
-- **Live CPU usage** — per-core breakdown + average with real delta calculation (same method as `htop`)
-- **Memory metrics** — heap used vs total, percentage with color-coded thresholds
-- **Disk usage** — real disk read via `df` command
-- **CPU history sparkline** — 40-point live graph drawn with HTML5 Canvas
-- **Load average** — 1 min / 5 min / 15 min system load
-- **Smart alerts** — warning banner auto-appears when CPU > 85%, Memory > 85%, or Disk > 90%
-- **Auto-refresh** — metrics stream every 2 seconds via SSE (no polling, no WebSockets)
-- **REST endpoint** — `/api/metrics` returns raw JSON for any external use
-- **Zero npm dependencies** — uses only Node.js built-in modules
 
 ---
 
 ## 📸 Preview
 
-> Dashboard shows live system stats including CPU cores, memory bar, disk usage, uptime, process ID, Node version, and a real-time CPU history chart.
+![Server Health Monitor Dashboard](https://github.com/sivaconnects/Real-Time-Server-Health-Monitor/blob/main/Screenshot%202026-02-25%20115231.png)
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ What It Shows
 
-| Layer | Technology |
-|---|---|
-| Runtime | Node.js (built-in `http`, `os`, `fs`, `child_process`) |
-| Streaming | Server-Sent Events (SSE) |
-| Frontend | Vanilla HTML, CSS, JavaScript |
-| Chart | HTML5 Canvas API |
-| Deployment | AWS EC2 (Amazon Linux 2023) |
-| Process Manager | PM2 |
+- ✅ Live CPU, Memory and Disk usage
+- ✅ Per-core CPU breakdown
+- ✅ CPU history chart
+- ✅ System uptime and process info
+- ✅ Auto alert when resources cross 85%
 
 ---
 
-## 📂 Project Structure
+## 💻 Run On Your Local Machine
 
-```
-server-health-monitor/
-├── app.js          ← entire application (server + dashboard UI)
-├── package.json    ← project metadata
-└── README.md       ← you are here
-```
+Follow these steps one by one 👇
 
----
+### Step 1 — Install Node.js
 
-## ⚡ Run Locally
-
-### Prerequisites
-- [Node.js](https://nodejs.org/) v14 or higher
-
-**Install Node.js on Ubuntu / Debian:**
-```bash
-sudo apt update -y
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo bash -
-sudo apt install -y nodejs
-```
-
-**Install Node.js on RHEL / CentOS / Amazon Linux:**
-```bash
-sudo yum update -y
-curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
-sudo yum install -y nodejs
-```
-
-**Install Node.js on macOS (Homebrew):**
-```bash
-brew install node
-```
-
-**Install Node.js on Windows:**
-Download and install from [nodejs.org](https://nodejs.org/)
-
-### Steps
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/sivaconnects/Real-Time-Server-Health-Monitor.git
-
-# 2. Navigate into the project folder
-cd Real-Time-Server-Health-Monitor
-
-# 3. Run the app (no npm install needed — zero dependencies!)
-node app.js
-```
-
-Then open your browser and visit:
-
-```
-http://localhost:3000
-```
-
-That's it. No `.env` files, no database, no setup. ✅
-
----
-
-## 🌐 Available Endpoints
-
-| Endpoint | Description |
-|---|---|
-| `GET /` | Live dashboard UI |
-| `GET /stream` | SSE stream (real-time metrics) |
-| `GET /api/metrics` | Raw JSON metrics snapshot |
-
----
-
-## ☁️ Deploy on AWS EC2
-
-### Step 1 — Launch EC2 Instance
-- AMI: **Amazon Linux 2023**
-- Instance type: **t2.micro** (free tier eligible)
-- Security Group inbound rules:
-
-| Port | Purpose |
-|---|---|
-| 22 | SSH access |
-| 3000 | App access |
-
-### Step 2 — SSH into Your Instance
-
-```bash
-chmod 400 your-key.pem
-ssh -i your-key.pem ec2-user@<YOUR_EC2_PUBLIC_IP>
-```
-
-### Step 3 — Install Node.js
-
-**Amazon Linux 2023 / RHEL / CentOS:**
-```bash
-sudo yum update -y
-curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
-sudo yum install -y nodejs
-```
+> Node.js is the runtime that runs our app. Install it based on your OS.
 
 **Ubuntu / Debian:**
 ```bash
@@ -150,93 +41,208 @@ curl -fsSL https://deb.nodesource.com/setup_18.x | sudo bash -
 sudo apt install -y nodejs
 ```
 
-Verify installation on any OS:
+**Amazon Linux / RHEL:**
+```bash
+sudo yum update -y
+curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+sudo yum install -y nodejs
+```
+
+**macOS:**
+```bash
+brew install node
+```
+
+**Windows:** Download and install from 👉 https://nodejs.org
+
+Check if Node.js installed correctly:
 ```bash
 node -v
 npm -v
 ```
+You should see version numbers printed. ✅
 
-### Step 4 — Clone & Run
+---
+
+### Step 2 — Install Git
+
+> Git is used to download (clone) the project to your machine.
+
+**Ubuntu / Debian:**
+```bash
+sudo apt install -y git
+```
+
+**Amazon Linux / RHEL:**
+```bash
+sudo yum install -y git
+```
+
+**macOS:**
+```bash
+brew install git
+```
+
+**Windows:** Download and install from 👉 https://git-scm.com
+
+---
+
+### Step 3 — Download the Project
 
 ```bash
-# Clone the repo
 git clone https://github.com/sivaconnects/Real-Time-Server-Health-Monitor.git
-cd Real-Time-Server-Health-Monitor
+```
 
-# Start the app
+Go into the project folder:
+```bash
+cd Real-Time-Server-Health-Monitor
+```
+
+---
+
+### Step 4 — Start the App
+
+```bash
 node app.js
 ```
 
-Visit `http://<YOUR_EC2_PUBLIC_IP>:3000` in your browser 🎉
+You should see this in the terminal:
+```
+🚀 Server Health Monitor
+📡 Dashboard → http://localhost:3000
+```
 
-### Step 5 — Keep It Running with PM2
+---
+
+### Step 5 — Open in Browser
+
+Open your browser and go to:
+```
+http://localhost:3000
+```
+
+You will see the live dashboard. 🎉
+
+> To stop the app press `Ctrl + C` in the terminal.
+
+---
+
+## ☁️ Deploy on AWS EC2
+
+> EC2 is a virtual server on AWS. Follow these steps to run the app on the cloud so anyone can access it from anywhere.
+
+### Step 1 — Create an EC2 Instance
+
+1. Login to [AWS Console](https://aws.amazon.com/console/)
+2. Go to **EC2** → Click **"Launch Instance"**
+3. Fill in the details:
+   - Name: `server-health-monitor`
+   - AMI: **Amazon Linux 2023**
+   - Instance type: **t2.micro** *(free tier)*
+4. Under **Key pair** → click **"Create new key pair"** → download the `.pem` file and save it safely
+5. Under **Security Group** → Add these rules:
+
+| Port | Purpose |
+|---|---|
+| 22 | SSH — to connect to the server |
+| 3000 | App — to open in browser |
+
+6. Click **"Launch Instance"**
+
+---
+
+### Step 2 — Connect to Your EC2 Server
+
+> SSH lets you control your EC2 server from your local terminal.
+
+Open your terminal and run:
+
+**Mac / Linux:**
+```bash
+chmod 400 your-key.pem
+ssh -i your-key.pem ec2-user@<YOUR_EC2_PUBLIC_IP>
+```
+
+**Windows (use PowerShell):**
+```bash
+ssh -i your-key.pem ec2-user@<YOUR_EC2_PUBLIC_IP>
+```
+
+> Replace `<YOUR_EC2_PUBLIC_IP>` with the IP shown in your EC2 dashboard.
+
+---
+
+### Step 3 — Install Git on EC2
+
+```bash
+sudo yum install -y git
+```
+
+---
+
+### Step 4 — Install Node.js on EC2
+
+```bash
+sudo yum update -y
+curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+sudo yum install -y nodejs
+```
+
+---
+
+### Step 5 — Download and Run the App
+
+```bash
+git clone https://github.com/sivaconnects/Real-Time-Server-Health-Monitor.git
+cd Real-Time-Server-Health-Monitor
+node app.js
+```
+
+Now open your browser and visit:
+```
+http://<YOUR_EC2_PUBLIC_IP>:3000
+```
+
+Your dashboard is live on the internet! 🎉
+
+---
+
+### Step 6 — Keep the App Running 24/7 with PM2
+
+> By default the app stops when you close the terminal. PM2 keeps it running in the background.
 
 ```bash
 # Install PM2
 sudo npm install -g pm2
 
-# Start with PM2
+# Start the app with PM2
 pm2 start app.js --name "health-monitor"
 
-# Auto-start on reboot
+# Make it auto start when EC2 reboots
 pm2 startup
 pm2 save
 ```
 
-### Step 6 — (Optional) Run on Port 80
-
+Useful PM2 commands:
 ```bash
-sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
-```
-
-Also open port **80** in your EC2 Security Group. Then users can access it at:
-```
-http://<YOUR_EC2_PUBLIC_IP>
+pm2 list              # see running apps
+pm2 logs              # see live logs
+pm2 restart health-monitor
+pm2 stop health-monitor
 ```
 
 ---
 
-## 🔧 Configuration
-
-You can change the port using an environment variable:
-
-```bash
-PORT=8080 node app.js
-```
-
----
-
-## 🐛 Troubleshooting
+## 🐛 Something Not Working?
 
 | Problem | Fix |
 |---|---|
-| Can't SSH into EC2 | Run `chmod 400 your-key.pem`, check Security Group port 22 |
-| Can't open in browser | Check Security Group allows port 3000 from `0.0.0.0/0` |
-| App stops after SSH disconnect | Use PM2 (Step 5 above) |
+| `node: command not found` | Node.js is not installed — redo Step 1 |
+| `git: command not found` | Git is not installed — redo Step 2 |
+| Can't SSH into EC2 | Run `chmod 400 your-key.pem` first |
+| App opens but browser shows nothing | Make sure port 3000 is open in EC2 Security Group |
+| App stops when terminal closes | Use PM2 — follow Step 6 |
 | Port already in use | Run `kill $(lsof -t -i:3000)` then restart |
-| Disk shows 0% | `df` command may not be available — works on Linux (EC2) |
-
----
-
-## 📖 What I Learned
-
-- How **Server-Sent Events (SSE)** work for real-time data streaming
-- How to calculate **CPU usage** using time deltas from `os.cpus()`
-- Deploying a Node.js app on **AWS EC2** and managing it with **PM2**
-- Reading real system metrics using Node.js built-in modules
-- Drawing a live chart using **HTML5 Canvas API** with no libraries
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome! If you find a bug or want to add a feature:
-
-1. Fork the repo
-2. Create a new branch — `git checkout -b feature/your-feature`
-3. Commit your changes — `git commit -m "Add your feature"`
-4. Push to the branch — `git push origin feature/your-feature`
-5. Open a Pull Request
 
 ---
 
@@ -248,10 +254,4 @@ Pull requests are welcome! If you find a bug or want to add a feature:
 
 ---
 
-## 📄 License
-
-This project is licensed under the **ISC License**.
-
----
-
-⭐ **If you found this helpful, please give it a star!** It motivates me to keep building and learning. 🙏
+⭐ If this helped you, give it a star! It motivates me to keep building. 🙏
