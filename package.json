@@ -1,0 +1,11 @@
+{
+  "name": "devops-practice-app",
+  "version": "1.0.0",
+  "description": "Simple Node.js app for EC2 deployment practice",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "DevOps Learner",
+  "license": "ISC"
+}
