@@ -40,21 +40,6 @@ sudo apt update -y
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo bash -
 sudo apt install -y nodejs
 ```
-
-**Amazon Linux / RHEL:**
-```bash
-sudo yum update -y
-curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
-sudo yum install -y nodejs
-```
-
-**macOS:**
-```bash
-brew install node
-```
-
-**Windows:** Download and install from 👉 https://nodejs.org
-
 Check if Node.js installed correctly:
 ```bash
 node -v
@@ -72,19 +57,6 @@ You should see version numbers printed. ✅
 ```bash
 sudo apt install -y git
 ```
-
-**Amazon Linux / RHEL:**
-```bash
-sudo yum install -y git
-```
-
-**macOS:**
-```bash
-brew install git
-```
-
-**Windows:** Download and install from 👉 https://git-scm.com
-
 ---
 
 ### Step 3 — Download the Project
@@ -160,11 +132,6 @@ Open your terminal and run:
 **Mac / Linux:**
 ```bash
 chmod 400 your-key.pem
-ssh -i your-key.pem ec2-user@<YOUR_EC2_PUBLIC_IP>
-```
-
-**Windows (use PowerShell):**
-```bash
 ssh -i your-key.pem ec2-user@<YOUR_EC2_PUBLIC_IP>
 ```
 
@@ -246,12 +213,3 @@ pm2 stop health-monitor
 
 ---
 
-## 👨‍💻 Author
-
-**Venkata Siva Prasad Kanishetty**
-- GitHub: [@sivaconnects](https://github.com/sivaconnects)
-- LinkedIn: [Venkata Siva Prasad Kanishetty](https://www.linkedin.com/in/kanishetty/)
-
----
-
-⭐ If this helped you, give it a star! It motivates me to keep building. 🙏
